@@ -5,7 +5,7 @@ spring:
     mongodb:
       port: 27017
       host: localhost
-      database: myCompany
+      database: newsletter
 
 # Configuracao da porta do servi�o de forma aleatoria
 server:
@@ -28,3 +28,10 @@ logging:
           mongodb:
             core:
               MongoTemplate: DEBUG
+
+# RabbitMQ - Variaveis de ambiente customizadas
+news:
+  rabbitmq:
+    exchange: news.exchange
+    routingkey: news.logs.routingkey
+    queue: news.queue

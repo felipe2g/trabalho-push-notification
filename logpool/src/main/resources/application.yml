@@ -27,7 +27,7 @@ eureka:
 news:
   rabbitmq:
     exchange: news.exchange
-    rountingkey: news.employee.routingkey
+    routingkey: news.logs.routingkey
     queue: news.queue
 
 # Mostrar Queries MongoDB no Terminal:
