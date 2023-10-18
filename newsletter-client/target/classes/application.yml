@@ -35,3 +35,7 @@ news:
     exchange: news.exchange
     routingkey: news.logs.routingkey
     queue: news.queue
+
+# Firebase
+firebase:
+  credential-file-name: firebase-account.json

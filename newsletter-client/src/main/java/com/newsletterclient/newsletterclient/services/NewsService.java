@@ -2,6 +2,7 @@ package com.newsletterclient.newsletterclient.services;
 
 import com.newsletterclient.newsletterclient.message.RabbitMqSendLog;
 import com.newsletterclient.newsletterclient.models.News;
+import com.newsletterclient.newsletterclient.models.NotificationMessage;
 import com.newsletterclient.newsletterclient.models.dtos.LogDTO;
 import com.newsletterclient.newsletterclient.models.dtos.NewsDTO;
 import com.newsletterclient.newsletterclient.repositories.NewsRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,9 @@ public class NewsService {
 
     @Autowired
     private RabbitMqSendLog rabbitMqSendLog;
+
+    @Autowired
+    private FirebaseMessagingService firebaseMessagingService;
 
     public NewsService(NewsRepository repository) {
         this.newsRepository = repository;
@@ -65,6 +70,15 @@ public class NewsService {
                         dbNews.getClass().toString()
                 )
         );
+
+        firebaseMessagingService.sendNotification(new NotificationMessage(
+                // Aqui vai o id do cliente
+                "...",
+                news.getTitle(),
+                "Postagem adicionada.",
+                "https://play-lh.googleusercontent.com/ZrsPit-BgpiMdm3am82N-4XV5DJJTkf1JzWFi26F39dWX6gCBFylt3t4iL93NOYeVhM=w240-h480",
+                new HashMap<>()
+        ));
 
         return ResponseEntity.ok(dbNews);
     }
